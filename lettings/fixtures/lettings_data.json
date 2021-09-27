@@ -1,0 +1,18 @@
+[
+    {
+        "model": "lettings.Letting",
+        "pk": 1,
+        "fields": {
+            "title": "lettingname",
+            "address": 1
+        }
+    },
+    {
+        "model": "lettings.Letting",
+        "pk": 2,
+        "fields": {
+            "title": "londonletting",
+            "address": 2
+        }
+    }
+]

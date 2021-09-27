@@ -1,0 +1,26 @@
+[
+    {
+        "model": "lettings.Address",
+        "pk": 1,
+        "fields": {
+            "number": 10,
+            "street": "Avenue Exemple",
+            "city": "Paris",
+            "state": "PA",
+            "zip_code": 10000,
+            "country_iso_code": "FRA"
+        }
+    },
+    {
+        "model": "lettings.Address",
+        "pk": 2,
+        "fields": {
+            "number": 10,
+            "street": "Example Street",
+            "city": "London",
+            "state": "LO",
+            "zip_code": 20000,
+            "country_iso_code": "UKG"
+        }
+    }
+]

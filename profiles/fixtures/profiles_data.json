@@ -1,0 +1,18 @@
+[
+    {
+        "model": "profiles.Profile",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "favorite_city": "London"
+        }
+    },
+    {
+        "model": "profiles.Profile",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "favorite_city": "Paris"
+        }
+    }
+]
