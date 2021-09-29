@@ -24,8 +24,3 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: python_app
-
-workflows:
-  main:
-    jobs:
-      - build
