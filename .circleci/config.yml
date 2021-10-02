@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: fortranvba/dap13
+      - image: fortranvba/dap13:dap13prod
         auth:
           username: fortranvba
           password: $DOCKERHUB_PASSWORD       
