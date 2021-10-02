@@ -11,12 +11,10 @@ jobs:
       - run:
           name: Running linter
           command: |
-            . venv/bin/activate
             flake8
       - run:
           name: Running tests
           command: |
-            . venv/bin/activate
             python manage.py test
       - store_artifacts:
           path: test-reports/
