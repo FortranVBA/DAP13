@@ -1,4 +1,4 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 
 
 # Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie quam
@@ -9,5 +9,5 @@ from django.shortcuts import render
 # Aliquam vitae erat ac orci placerat luctus. Nullam elementum urna nisi, pellentesque
 # iaculis enim cursus in. Praesent volutpat porttitor magna, non finibus neque cursus
 # id.
-def index(request):
-    return render(request, 'index.html')
+# def index(request):
+#    return render(request, 'index.html')
