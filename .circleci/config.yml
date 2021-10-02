@@ -10,6 +10,8 @@ workflows:
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
+          post-steps:
+            - run: python manage.py migrate          
 
 jobs:
   build:
@@ -27,11 +29,7 @@ jobs:
       - run:
           name: Running tests
           command: |
-            python manage.py test
-      - run:
-          name: Migrate
-          command: |
-            python manage.py migrate        
+            python manage.py test  
       - store_artifacts:
           path: test-reports/
           destination: python_app
