@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: fortranvba/dap13
+        auth:
+          username: fortranvba
+          password: $DOCKERHUB_PASSWORD       
     steps:
       - checkout
       - restore_cache:
