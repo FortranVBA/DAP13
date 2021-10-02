@@ -11,7 +11,10 @@ workflows:
           requires:
             - build
           post-steps:
-            - run: python manage.py migrate          
+            - run:      
+              name: Migration
+              command: |
+                python manage.py migrate
 
 jobs:
   build:
