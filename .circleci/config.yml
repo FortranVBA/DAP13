@@ -10,11 +10,6 @@ workflows:
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
-          post-steps:
-            - run:      
-              name: Migration
-              command: |
-                python manage.py migrate
 
 jobs:
   build:
