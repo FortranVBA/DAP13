@@ -28,6 +28,11 @@ jobs:
           name: Running tests
           command: |
             python manage.py test
+      - run:
+          name: Migrate
+          command: |
+            python manage.py migrate        
       - store_artifacts:
           path: test-reports/
           destination: python_app
+    
