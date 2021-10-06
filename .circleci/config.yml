@@ -21,9 +21,6 @@ jobs:
   build_main:
     docker:
       - image: docker:18.09-git
-        auth:
-          username: fortranvba
-          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - setup_remote_docker
@@ -46,4 +43,5 @@ jobs:
       - deploy:
           name: Push application Docker image
           command: |
+            docker login -u fortranvba -p $DOCKERHUB_PASSWORD
             docker push fortranvba/dap13:dap13prod
