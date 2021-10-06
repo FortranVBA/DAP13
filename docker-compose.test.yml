@@ -1,7 +1,12 @@
 version: "2.1"
 services:
-  app:
+  tests:
+    image: app
+    command: python manage.py test
+    depends_on:
+      - linter
+  linter:
     build:
       context: .
     image: app
-  command: [sh, -cx, "flake8 && python manage.py test"]
+    command: flake8
