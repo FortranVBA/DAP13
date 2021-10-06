@@ -6,22 +6,53 @@ orbs:
 workflows:
   heroku_deploy:
     jobs:
-      - build
-      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+      - build_main:
+          filters:
+            branches:
+              only: main
+      - heroku/deploy-via-git:
           requires:
             - build
           filters:
             branches:
-              only: main # only run deploy-via-git job on master branch
+              only: main
 jobs:
-  build:
+  build_main:
     docker:
-      - image: fortranvba/dap13:dap13prod
+      - image: python:3.7-slim-buster
         auth:
           username: fortranvba
-          password: $DOCKERHUB_PASSWORD       
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/app.tar
+        - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/app.tar | true
+        - run:
+          name: Build application Docker image
+          command: |
+            docker build --cache-from=app -t app .
+        - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/app.tar app
+        - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/app.tar            
       - run:
           name: Running linter
           command: |
@@ -33,4 +64,7 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: python_app
-    
+      - deploy:
+          name: Push application Docker image
+          command: |
+            docker push fortranvba/dap13:dap13prod
