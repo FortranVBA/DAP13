@@ -53,5 +53,7 @@ jobs:
       - run:
           name: Deploy Master to Heroku
           command: |
+            su -
+            apt-get install sudo -y
             sudo apt install git-all
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
