@@ -7,9 +7,9 @@ workflows:
           filters:
             branches:
               only: main
-      - deploy:
+      - heroku/deploy-via-git:
           requires:
-            - build_main
+            - build
           filters:
             branches:
               only: main
@@ -42,21 +42,4 @@ jobs:
           command: |
             docker login -u fortranvba -p $DOCKERHUB_PASSWORD
             docker push fortranvba/dap13:dap13prod
-  deploy:
-    docker:
-      - image: fortranvba/dap13:dap13prod
-        auth:
-          username: fortranvba
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          name: Deploy Master to Heroku
-          command: |
-            set -x
-            su -
-            apt-get install sudo -y
-            sudo curl https://cli-assets.heroku.com/install.sh | sh
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push web
-            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release web
+
