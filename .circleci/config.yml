@@ -13,7 +13,6 @@ workflows:
       - heroku/deploy-via-git:
           requires:
             - build_main
-            - test_main
           filters:
             branches:
               only: main
