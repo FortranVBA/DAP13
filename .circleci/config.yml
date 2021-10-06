@@ -10,12 +10,6 @@ workflows:
           filters:
             branches:
               only: main
-      - test_main:
-          requires:
-            - build_main
-          filters:
-            branches:
-              only: main
       - heroku/deploy-via-git:
           requires:
             - build_main
@@ -39,9 +33,10 @@ jobs:
           command: |
             docker build -t fortranvba/dap13:dap13prod .
       - run:
-          name: Run local Docker image
+          name: Run linter
           command: |
-            docker run fortranvba/dap13:dap13prod
+            docker-compose -f ./docker-compose.test_linter.yml up
+
   test_main:
     docker:
       - image: fortranvba/dap13:dap13prod
