@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   heroku: circleci/heroku@1.2.6
-  
+
 workflows:
   heroku_deploy:
     jobs:
@@ -12,7 +12,7 @@ workflows:
               only: main
       - heroku/deploy-via-git:
           requires:
-            - build
+            - build_main
           filters:
             branches:
               only: main
