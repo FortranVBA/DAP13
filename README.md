@@ -76,4 +76,7 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`S
 
-T
+docker run -p 8000:8000 fortranvba/dap13:dap13prod
+
+Utilisation dans la console :
+python manage.py loaddata dump.json
