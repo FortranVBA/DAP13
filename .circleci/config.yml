@@ -31,7 +31,7 @@ jobs:
           name: Install docker-compose
           command: |
             apk add --update py3-pip
-            pip install docker-compose==1.12.0
+            pip3 install docker-compose==1.12.0
       - run:
           name: Build application Docker image from file
           command: |
