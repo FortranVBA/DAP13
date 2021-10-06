@@ -10,6 +10,10 @@ workflows:
           filters:
             branches:
               only: main
+      - build_test:
+          filters:
+            branches:
+              ignore: main
       - heroku/deploy-via-git:
           requires:
             - build_main
@@ -45,4 +49,16 @@ jobs:
           command: |
             docker login -u fortranvba -p $DOCKERHUB_PASSWORD
             docker push fortranvba/dap13:dap13prod
+  build_test:
+    docker:
+      - image: fortranvba/dap13:dap13prod
+    steps:
+      - checkout
+      - run:
+          name: Run test
+          command: |
+            docker-compose -f ./docker-compose.test.yml up
+      - store_artifacts:
+          path: test-reports/
+          destination: python_app
 
