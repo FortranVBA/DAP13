@@ -54,8 +54,9 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             set -x
+            su -
+            apt-get install sudo -y
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release web
-            
