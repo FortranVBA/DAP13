@@ -20,7 +20,7 @@ workflows:
 jobs:
   build_main:
     docker:
-      - image: docker:18.09-git
+      - image: docker:17.05.0-ce-git
         auth:
           username: fortranvba
           password: $DOCKERHUB_PASSWORD
