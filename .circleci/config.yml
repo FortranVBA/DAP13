@@ -37,22 +37,9 @@ jobs:
           command: |
             docker build -t fortranvba/dap13:dap13prod .
       - run:
-          name: Run linter
+          name: Run test
           command: |
-            docker-compose -f ./docker-compose.test_linter.yml up
-
-  test_main:
-    docker:
-      - image: fortranvba/dap13:dap13prod
-    steps:
-      - run:
-          name: Running linter
-          command: |
-            flake8
-      - run:
-          name: Running tests
-          command: |
-            python manage.py test  
+            docker-compose -f ./docker-compose.test.yml up
       - store_artifacts:
           path: test-reports/
           destination: python_app

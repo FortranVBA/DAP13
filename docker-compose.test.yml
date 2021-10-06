@@ -4,4 +4,6 @@ services:
     build:
       context: .
     image: app
-    command: flake8
+  command: >
+      bash -c "flake8
+      && python manage.py test "
