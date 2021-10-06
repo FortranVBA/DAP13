@@ -4,4 +4,4 @@ services:
     build:
       context: .
     image: app
-  command: ["flake8", "python manage.py test"]
+  command: [sh, -cx, "flake8 && python manage.py test"]
