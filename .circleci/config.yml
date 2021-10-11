@@ -70,6 +70,9 @@ jobs:
           command: |
             set -x
             curl https://cli-assets.heroku.com/install.sh | sh
+            apt update
+            apt upgrade
+            apt install sudo            
             sudo apt-get update
             sudo apt-get install docker-ce docker-ce-cli containerd.io
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
