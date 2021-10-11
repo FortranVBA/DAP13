@@ -76,6 +76,8 @@ jobs:
       # Deploy to Heroku
       - heroku/install
       - run: heroku container:login
-      - heroku/push-docker-image
-      - heroku/release-docker-image
+      - heroku/push-docker-image:
+          process-types: web
+      - heroku/release-docker-image:
+          process-types: web
       - heroku/deploy-via-git
