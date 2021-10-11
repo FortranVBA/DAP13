@@ -20,7 +20,8 @@ workflows:
           filters:
             branches:
               only: main
-
+          pre-steps:
+            - run: echo $DEBUG
 jobs:
   build_main:
     docker:
