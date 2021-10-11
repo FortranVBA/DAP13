@@ -68,8 +68,7 @@ jobs:
       - image: fortranvba/dap13:dap13prod
     steps:
       - setup_remote_docker:
-          version: 20
-
+          version: 19.03.13
       # Build the docker image
       - checkout
       - run: docker build .
