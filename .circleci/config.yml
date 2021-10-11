@@ -37,7 +37,8 @@ jobs:
       - run:
           name: Build application Docker image from file
           command: |
-            docker build -t fortranvba/dap13:dap13prod .
+            docker build -t fortranvba/dap13 .
+            docker tag fortranvba/dap13:latest fortranvba/dap13:$CIRCLE_SHA1
       - run:
           name: Run test
           command: |
@@ -49,7 +50,8 @@ jobs:
           name: Push application Docker image
           command: |
             docker login -u fortranvba -p $DOCKERHUB_PASSWORD
-            docker push fortranvba/dap13:dap13prod
+            docker push fortranvba/dap13:latest
+            docker push fortranvba/dap13:$CIRCLE_SHA1
   build_test:
     docker:
       - image: fortranvba/dap13:dap13prod
@@ -71,7 +73,7 @@ jobs:
           version: 19.03.13
       # Build the docker image
       - checkout
-      - run: docker build . --pull --no-cache --tag fortranvba/dap13:dap13prod
+      - run: docker build . --pull --no-cache --tag fortranvba/dap13:latest
 
       # Deploy to Heroku
       - heroku/install
