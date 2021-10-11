@@ -71,7 +71,7 @@ jobs:
           version: 19.03.13
       # Build the docker image
       - checkout
-      - run: docker run fortranvba/dap13:dap13prod
+      - run: docker build . --pull --no-cache --tag fortranvba/dap13:dap13prod
 
       # Deploy to Heroku
       - heroku/install
@@ -80,4 +80,3 @@ jobs:
           process-types: web
       - heroku/release-docker-image:
           process-types: web
-      - heroku/deploy-via-git
