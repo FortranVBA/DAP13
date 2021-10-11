@@ -78,7 +78,7 @@ jobs:
       # Deploy to Heroku
       - heroku/install
       - run: heroku container:login
-      - run: heroku ci:config:set DEBUG_DJANGO=$DEBUG_DJANGO
+      - run: heroku ci:config: set DEBUG_DJANGO=$DEBUG_DJANGO --app $HEROKU_APP_NAME 
       - heroku/push-docker-image:
           process-types: web
       - heroku/release-docker-image:
