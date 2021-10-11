@@ -61,6 +61,7 @@ jobs:
           path: test-reports/
           destination: python_app
   heroku_deploy:
+    machine: true
     steps:
       - checkout
       - run:
