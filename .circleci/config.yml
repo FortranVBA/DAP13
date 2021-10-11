@@ -11,7 +11,7 @@ workflows:
           filters:
             branches:
               ignore: main
-      - heroku/deploy-via-git:
+      - deploy_with_heroku:
           requires:
             - build_main
           filters:
@@ -60,7 +60,7 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: python_app
-  heroku_deploy:
+  deploy_with_heroku:
     docker:
       - image: fortranvba/dap13:dap13prod
     steps:
