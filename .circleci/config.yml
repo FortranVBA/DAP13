@@ -69,7 +69,6 @@ jobs:
           command: |
             set -x
             sudo curl https://cli-assets.heroku.com/install.sh | sh
-            DEBUG=${DEBUG}
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a oc-lettings-mpyf web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a oc-lettings-mpyf web
