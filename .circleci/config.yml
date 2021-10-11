@@ -80,5 +80,6 @@ jobs:
       - run: heroku container:login
       - heroku/push-docker-image:
           process-types: web
+      - run: heroku ci:config:set DEBUG_DJANGO='True'
       - heroku/release-docker-image:
           process-types: web
