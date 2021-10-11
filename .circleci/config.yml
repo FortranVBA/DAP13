@@ -69,7 +69,7 @@ jobs:
           name: Build and push docker image to heroku
           command: |
             set -x
-            curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+            curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a oc-lettings-mpyf web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a oc-lettings-mpyf web
