@@ -21,7 +21,7 @@ workflows:
             branches:
               only: main
           pre-steps:
-            - run: echo $DEBUG
+            - run: export DEBUG=$DEBUG
 jobs:
   build_main:
     docker:
