@@ -14,7 +14,7 @@ workflows:
           filters:
             branches:
               ignore: main
-      - heroku/deploy-via-git:
+      - deploy_with_heroku:
           requires:
             - build_main
           filters:
