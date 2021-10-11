@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  heroku: circleci/heroku@1.2.6
-
 workflows:
   heroku_deploy:
     jobs:
@@ -14,15 +11,13 @@ workflows:
           filters:
             branches:
               ignore: main
-      - heroku/deploy-via-git:
+      - heroku_deploy:
           requires:
             - build_main
           filters:
             branches:
               only: main
-          pre-steps:
-            - run: export DEBUG=$DEBUG
-            - run: set
+
 
 jobs:
   build_main:
@@ -65,4 +60,15 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: python_app
-
+  heroku_deploy:
+    steps:
+      - checkout
+      - run:
+          name: Build and push docker image to heroku
+          command: |
+            set -x
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            DEBUG=${DEBUG}
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a oc-lettings-mpyf web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a oc-lettings-mpyf web
