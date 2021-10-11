@@ -65,13 +65,13 @@ jobs:
           destination: python_app
   deploy_with_heroku:
     docker:
-      - image: fortranvba/dap13:dap13prod
+      - image: cimg/base:2021.07
     steps:
       - setup_remote_docker:
           version: 19.03.13
       # Build the docker image
       - checkout
-      - run: docker build .
+      - docker run fortranvba/dap13:dap13prod
 
       # Deploy to Heroku
       - heroku/install
