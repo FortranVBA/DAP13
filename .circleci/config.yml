@@ -54,7 +54,7 @@ jobs:
             docker push fortranvba/dap13:$CIRCLE_SHA1
   build_test:
     docker:
-      - image: fortranvba/dap13:latest
+      - image: cimg/base:2021.07
     steps:
       - checkout
       - run:

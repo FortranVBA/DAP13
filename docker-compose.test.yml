@@ -1,12 +1,12 @@
 version: "2.1"
 services:
   tests:
-    image: app
+    image: fortranvba/dap13:latest
     command: python manage.py test
     depends_on:
       - linter
   linter:
     build:
       context: .
-    image: app
+    image: fortranvba/dap13:latest
     command: flake8
