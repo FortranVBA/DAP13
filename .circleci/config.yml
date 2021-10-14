@@ -67,7 +67,7 @@ jobs:
           name: Build application Docker image from file
           command: |
             docker build -t fortranvba/dap13 .
-            docker tag fortranvba/dap13:latest
+            docker tag fortranvba/dap13:latest fortranvba/dap13:$CIRCLE_SHA1
       - run:
           name: Run test
           command: |
