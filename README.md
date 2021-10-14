@@ -111,15 +111,14 @@ Le déploiement du site se fait par l'intermédiaire d'un pipeline CircleCI, dé
 - Dans project settings, ajouter les variables d'environnement suivantes (à noter que celles-ci seront utilisées pour les tests et non pour le déploiement vers Heroku)
   - Name: DJANGO_SK Value: "kjgtdtetg564"
   - Name: DEBUG_DJANGO Value: "True"
-
-export DJANGO_SK="isihdihfihio"
-export DEBUG_DJANGO="True"
-
-Variables heroku:
-DJANGO_SK
-DEBUG_DJANGO
-
-
-
-Utilisation dans la console :
-python manage.py loaddata dump.json
+Ainsi que les différents identifiants / mots de passe :
+  - DOCKERHUB_USERNAME: Nom utilisateur DockerHub
+  - DOCKERHUB_PASSWORD: Mot de passe utilisateur DockerHub
+  - HEROKU_API_KEY: Clé API utilisateur Heroku (à récupérer dans Account Settings de Heroku)
+  - HEROKU_APP_NAME: Nom utilisateur DockerHub
+- Se connecter à son compte Heroku.
+- Créer une application (son nom doit être le même que la variable précédente HEROKU_APP_NAME)
+- Dans Settings de l'application, ajouter dans Config Vars les variables suivantes :
+  - Name: DJANGO_SK Value: (Mettre la clé secrète Django à utiliser en production)
+  - Name: DEBUG_DJANGO Value: "False"
+- Le pipeline est maintenant en place.
