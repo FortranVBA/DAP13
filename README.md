@@ -37,6 +37,8 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - `cd /path/to/Python-OC-Lettings-FR`
 - `source venv/bin/activate`
 - `pip install --requirement requirements.txt`
+- `export DJANGO_SK="isihdihfihio"` La valeur de clé secrète doit être changée en production.
+- `export DEBUG_DJANGO="True"`
 - `python manage.py runserver`
 - Aller sur `http://localhost:8000` dans un navigateur.
 - Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
@@ -76,6 +78,40 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`S
 
+### Lancement de l'image depuis Docker
+
+### Prérequis
+
+- Installation de Docker
+
+### Lancement de l'image depuis Docker
+
+- Lancer Docker
+- Exécuter la commande `docker run -p 8000:8000 -e DJANGO_SK="isihdihfihio" -e DEBUG_DJANGO="True" fortranvba/dap13:latest`. La valeur de clé secrète (DJANGO_SK) doit être changée en production.
+- Le site est accessible à (l'adresse IP de la machine Docker):8000 ; Par exemple : http://192.168.99.100:8000/
+
+## Déploiement du site
+
+### Résumé
+
+Le déploiement du site se fait par l'intermédiaire d'un pipeline CircleCI, défini dans le fichier config.yml du dossier .circleci.
+- Lors d'un push de nouveau code sur le compte GitHub, CircleCI va créer une image Docker (construite à partir du fichier Dockerfile) et exécuter une série de test (linter et tests de l'application Django).
+- Dans le cas où il s'agit de la branche principale du GitHub (branche main), l'image Docker est envoyée sur DockerHub.
+- Toujours dans le cas où il s'agit de la branche principale du GitHub (branche main), l'image de DockerHub est envoyée vers Heroku pour y être exécuté, déployant ainsi le site.
+
+### Prérequis
+
+- Compte CircleCI
+- Compte DockerHub
+
+### Etapes pour lancer le déploiement
+
+- Se connecter à son compte CircleCI en s'identifiant avec son compte GitHub.
+- Dans l'onglet projet, ajouter le projet actuel (bouton Set Up Project), choisir l'option "If you already have .circleci/config.yml in your repo..." en mentionnant la branche `main`.
+- Dans project settings, ajouter les variables d'environnement suivantes (à noter que celles-ci seront utilisées pour les tests et non pour le déploiement vers Heroku)
+  - Name: DJANGO_SK Value: "kjgtdtetg564"
+  - Name: DEBUG_DJANGO Value: "True"
+
 export DJANGO_SK="isihdihfihio"
 export DEBUG_DJANGO="True"
 
@@ -83,7 +119,7 @@ Variables heroku:
 DJANGO_SK
 DEBUG_DJANGO
 
-docker run -p 8000:8000 -e DJANGO_SK="isihdihfihio" -e DEBUG_DJANGO="True" fortranvba/dap13:latest
+
 
 Utilisation dans la console :
 python manage.py loaddata dump.json
