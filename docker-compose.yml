@@ -5,9 +5,7 @@ services:
     environment:
       - DJANGO_SK="isdgsihdihfihio"
       - DEBUG_DJANGO="True"
-    volumes:
-      - .:/code 
     command:
-      - python ./code/manage.py runserver 0.0.0.0:8000
+      - python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
