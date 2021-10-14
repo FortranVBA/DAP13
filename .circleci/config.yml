@@ -54,7 +54,7 @@ jobs:
             docker push fortranvba/dap13:$CIRCLE_SHA1
   build_test:
     docker:
-      - image: fortranvba/dap13:latest
+      - image: cimg/base:2021.07
     steps:
       - checkout
       - run:
@@ -65,7 +65,12 @@ jobs:
       - run:
           name: Install new librairies
           command: |
-            pip install -r requirements.txt   
+            pip install -r requirements.txt
+      - run:
+          name: Build application Docker image from file
+          command: |
+            docker build -t fortranvba/dap13 .
+            docker tag fortranvba/dap13:latest          
       - run:
           name: Run test
           command: |
