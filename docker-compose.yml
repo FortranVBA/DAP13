@@ -1,8 +1,13 @@
-version: "3.7"
+version: "2.1"
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile_prod
+    image: fortranvba/dap13:latest
+    environment:
+      - DJANGO_SK="isdgsihdihfihio"
+      - DEBUG_DJANGO="True"
+    volumes:
+      - .:/code 
+    command:
+      - python ./code/manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
