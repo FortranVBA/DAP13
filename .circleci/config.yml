@@ -58,6 +58,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install new librairies
+          command: |
+            pip install -r requirements.txt   
+      - run:
           name: Run test
           command: |
             flake8
