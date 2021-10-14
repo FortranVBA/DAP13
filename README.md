@@ -83,7 +83,7 @@ Variables heroku:
 DJANGO_SK
 DEBUG_DJANGO
 
-docker run -p 8000:8000 -e DJANGO_SK="isihdihfihio" -e DEBUG_DJANGO="False" fortranvba/dap13:latest
+docker run -p 8000:8000 -e DJANGO_SK="isihdihfihio" -e DEBUG_DJANGO="True" fortranvba/dap13:latest
 
 Utilisation dans la console :
 python manage.py loaddata dump.json
